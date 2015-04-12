@@ -3,9 +3,8 @@
 
 using namespace std;
 
-const char * ReturnTypeToString (ReturnType returntype){
-	switch(returntype)
-	{
+const char * ReturnTypeToString(ReturnType returntype) {
+	switch (returntype) {
 	case UNKNOWN_RT:
 		return "UNKNOW return type";
 	case ERROR_RT:
@@ -18,12 +17,13 @@ const char * ReturnTypeToString (ReturnType returntype){
 		return "REAL return type";
 	case BOOL_RT:
 		return "BOOL return type";
+	default:
+		return "default";
 	}
 }
 
-const char * SymbolTypeToString (SymbolType symboltype){
-	switch(symboltype)
-	{
+const char * SymbolTypeToString(SymbolType symboltype) {
+	switch (symboltype) {
 	case UNKNOWN_ST:
 		return "UNKNOW return type";
 	case ERROR_ST:
@@ -37,17 +37,18 @@ const char * SymbolTypeToString (SymbolType symboltype){
 	case PROCEDURE_ST:
 		return "BOOL return type";
 	case PROGRAM_ST:
-			return "BOOL return type";
+		return "BOOL return type";
 	case TEMPVAR_ST:
-			return "BOOL return type";
+		return "BOOL return type";
 	case VARIABLE_ST:
-			return "BOOL return type";
+		return "BOOL return type";
+	default:
+		return "default";
 	}
 }
 
-const char * NodeTypeToString (NodeType nodetype){
-	switch(nodetype)
-	{
+const char * NodeTypeToString(NodeType nodetype) {
+	switch (nodetype) {
 	case ADD_NODE:
 		return "UNKNOW return type";
 	case AND_NODE:
@@ -114,5 +115,7 @@ const char * NodeTypeToString (NodeType nodetype){
 		return "BOOL return type";
 	case WHILE_NODE:
 		return "BOOL return type";
+	default:
+		return "default";
 	}
 }

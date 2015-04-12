@@ -1,10 +1,9 @@
 #ifndef _SYMBOL_H_
 #define _SYMBOL_H_
 
-#include <string>
-#include <vector>
-#include <cstdio>
-
+#include "string"
+#include "vector"
+#include "cstdio"
 #include "types.h"
 
 using namespace std;
@@ -47,12 +46,12 @@ class Symbol {
     void SetOffset(int offset);
     
     // Dump the contents
-    virtual void Dump (FILE * file, int indent);
+    virtual void Dump (FILE * file, int indent){};
 
     // Virtuals (empty for this base class)
-    virtual void AddParameter (Symbol * symbol);
-    virtual int GetParameterCount (void);
-    virtual Symbol * GetParameter (unsigned int num);
+    virtual void AddParameter (Symbol * symbol){};
+    virtual int GetParameterCount (void){return 0;};
+    virtual Symbol * GetParameter (unsigned int num){return NULL;};
 
   private:
     string myName;
@@ -61,7 +60,6 @@ class Symbol {
     SymbolType mySymbolType;
     int myOffset;
 };//Symbol
-
 
 
 // Extended symbol class for functions and procedures
@@ -87,4 +85,3 @@ class Symbol_Subprogram : public Symbol {
 };//Symbol_Subprogram
 
 #endif
-

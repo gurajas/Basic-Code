@@ -1,8 +1,3 @@
-#
-# Makefile for assignment 2 of the Compiler Construction course.
-# LIACS, Leiden University.
-#
-
 CC        = @CC@
 CXX       = @CXX@
 LEX       = @LEX@
@@ -23,7 +18,7 @@ LOADLIBS  = @LEXLIB@ -lm
 # If you want to add another C/C++ file to the compiler, add the name of the
 # corresponding .o file to the OBJFILES macro below in Makefile.in:
 #
-OBJFILES  = debug.o
+OBJFILES  = debug.o types.o Symbol.o
 OBJDIR    = gen/
 OBJS      = $(addprefix $(OBJDIR),$(OBJFILES))
 
@@ -46,7 +41,7 @@ Makefile: Makefile.in
 	./config.status
 
 # Dependency stuff
-comp: $(OBJDIR)y.tab.o $(OBJDIR)lex.yy.o $(OBJS) $(POBJS)
+comp: $(OBJDIR)y.tab.o $(OBJDIR)lex.yy.o $(OBJS)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LOADLIBS)
 
 $(OBJDIR)y.tab.h $(OBJDIR)y.tab.c: comp.y 
