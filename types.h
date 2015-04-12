@@ -7,53 +7,53 @@ using namespace std;
 
 // Return type of a node
 typedef enum __returntype {
-  RT_UNKNOWN,               // Not (yet) known
-  RT_ERROR,                 // Error
-  RT_VOID,                  // Void
-  RT_INT,                   // Integer
-  RT_REAL,                  // Floating point
-  RT_BOOL                   // Boolean expression
+  UNKNOWN_RT,               // Not (yet) known
+  ERROR_RT,                 // Error
+  VOID_RT,                  // Void
+  INT_RT,                   // Integer
+  REAL_RT,                  // Floating point
+  BOOL_RT                   // Boolean expression
 } ReturnType;
 
 
 // Type of a symbol
 typedef enum __symboltype {
-  ST_UNKNOWN,               // Unknown (yet)
-  ST_ERROR,                 // Error
-  ST_VARIABLE,              // Variable
-  ST_PARAMETER,             // Function/Procedure parameter
-  ST_PROCEDURE,             // Procedure
-  ST_FUNCTION,              // Function
-  ST_PROGRAM,               // Program body
-  ST_TEMPVAR,               // Temporary variable (not used before assignment 3)
-  ST_LABEL                  // Label (not used before assignment 3)
+  UNKNOWN_ST,               // Unknown (yet)
+  ERROR_ST,                 // Error
+  VARIABLE_ST,              // Variable
+  PARAMETER_ST,             // Function/Procedure parameter
+  PROCEDURE_ST,             // Procedure
+  FUNCTION_ST,              // Function
+  PROGRAM_ST,               // Program body
+  TEMPVAR_ST,               // Temporary variable (not used before assignment 3)
+  LABEL_ST                  // Label (not used before assignment 3)
 } SymbolType;
 
 
 // Type of a node in the syntax tree
 typedef enum __nodetype {
   /* Meta */
-  NODE_UNKNOWN,             // Unknown (yet)
-  NODE_ERROR,               // Error
+  UNKNOWN_NODE,             // Unknown (yet)
+  ERROR_NODE,               // Error
   
   /* Statement list
      left child     One of: NODE_ASSIGNMENT, NODE_IF, NODE_WHILE,
                     NODE_PROCCALL, NODE_FUNCTIONCALL, NODE_STATEMENT_LIST.
      right child    One of: NODE_ASSIGNMENT, NODE_IF, NODE_WHILE,
-                    NODE_PROCCALL, NODE_FUNCTIONCALL, NODE_STATEMENT_LIST, or
-                    NODE_EMPTY if no more statements follow. */
-  NODE_STATEMENT_LIST,
+                    PROCCALL_NODE, NODE_FUNCTIONCALL, NODE_STATEMENT_LIST, or
+                    EMPTY_NODE if no more statements follow. */
+  STATEMENT_LIST_NODE,
 
   /* Assignment
      left child     A NODE_ID that identifies the destination variable
      right child    A subtree representing an expression */
-  NODE_ASSIGNMENT,
+  ASSIGNMENT_NODE,
 
   /* If statement
      left child     A NODE_BOOLEXPR that provides the if condition
      right child    A NODE_IF_TARGETS subtree (if there is an else clause) or
                     a subtree consisting of statements (if there's no else) */
-  NODE_IF,
+  IF_NODE,
 
   /* Targets of an if-else-statement
      left child     The statements that have to be executed when the condition
@@ -61,66 +61,66 @@ typedef enum __nodetype {
      right child    The statements that have to be executed when the condition
                     of the parent if-statement is false, that is, the else
                     part. */
-  NODE_IF_TARGETS,
+  IF_TARGETS_NODE,
 
   /* While loop
      left child     A NODE_BOOLEXPR that provides the loop condition
      right child    A subtree consisting of statements */
-  NODE_WHILE,
+  WHILE_NODE,
 
   /* Subprogram calls
      left child     A NODE_ID that identifies the called function/procedure
      right child    A NODE_EXPRLIST that specifies the actual arguments, or
                     NODE_EMPTY if no arguments required. */
-  NODE_PROCCALL,
-  NODE_FUNCTIONCALL,
+  PROCCALL_NODE,
+  FUNCTIONCALL_NODE,
 
   /* Expression list
      left child     A subtree representing an expression
      right child    A subtree representing an expression, another
                     NODE_EXPRLIST, or NODE_EMPTY if no more expressions follow
                     in the expression list. */
-  NODE_EXPRLIST,
+  EXPRLIST_NODE,
 
   /* Boolean-like expression
      child          A subtree with any NODE_REL_ node as parent */
-  NODE_BOOLEXPR,
+  BOOLEXPR_NODE,
 
   /* Relational operators
      left child     Left-hand side of the comparison
      right child    Right-hand side of the comparison */
-  NODE_REL_EQUAL,           //  = operator
-  NODE_REL_LT,              //  < operator
-  NODE_REL_GT,              //  > operator
-  NODE_REL_LTE,             //  <= operator
-  NODE_REL_GTE,             //  >= operator
-  NODE_REL_NOTEQUAL,        //  <> operator
+  REL_EQUAL_NODE,           //  = operator
+  REL_LT_NODE,              //  < operator
+  REL_GT_NODE,              //  > operator
+  REL_LTE_NODE,             //  <= operator
+  REL_GTE_NODE,             //  >= operator
+  REL_NOTEQUAL_NODE,        //  <> operator
 
   /* Binary arithmetic & logic operations
      left child     Left-hand side of the operation
      right child    Right-hand side of the operation */
-  NODE_ADD,                 // Add
-  NODE_SUB,                 // Subtract
-  NODE_OR,                  // OR operation
-  NODE_MUL,                 // Multiply
-  NODE_DIV,                 // Divide
-  NODE_IDIV,                // Integer division
-  NODE_MOD,                 // Modulo
-  NODE_AND,                 // AND operation
+  ADD_NODE,                 // Add
+  SUB_NODE,                 // Subtract
+  OR_NODE,                  // OR operation
+  MUL_NODE,                 // Multiply
+  DIV_NODE,                 // Divide
+  IDIV_NODE,                // Integer division
+  MOD_NODE,                 // Modulo
+  AND_NODE,                 // AND operation
 
   /* Leafs
      these nodes have no child nodes */
-  NODE_NUM_INT,             // Integer number
-  NODE_NUM_REAL,            // Real number
-  NODE_ID,                  // Identifier
-  NODE_EMPTY,               // Empty leaf (terminates lists etc.)
+  NUM_INT_NODE,             // Integer number
+  NUM_REAL_NODE,            // Real number
+  ID_NODE,                  // Identifier
+  EMPTY_NODE,               // Empty leaf (terminates lists etc.)
 
   /* Unary nodes
      child          The subtree to which the operation has to be applied */
-  NODE_NOT,                 // NOT operation
-  NODE_SIGNPLUS,            // Unary plus
-  NODE_SIGNMINUS,           // Unary minus
-  NODE_COERCION             // Int to Real coercion
+  NOT_NODE,                 // NOT operation
+  SIGNPLUS_NODE,            // Unary plus
+  SIGNMINUS_NODE,           // Unary minus
+  COERCION_NODE            // Int to Real coercion
 } NodeType;
 
 
